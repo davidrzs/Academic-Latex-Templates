@@ -18,6 +18,6 @@ Feel free to fork it and submit your enhancements.
 
 | Description | Screenshot |
 |-------------|------------|
-| **Exam Summary / Cheatsheet** |![alt text](./lecture_notes.png)|
-| **Homework Template** |![alt text](./lecture_notes.png)|
-| **Lecture Notes Template** |![alt text](./lecture_notes.png)|
+| **Exam Summary / Cheatsheet** |![alt text](./lecture_notes/lecture_notes.png)|
+| **Homework Template** |![alt text](./lecture_notes/lecture_notes.png)|
+| **Lecture Notes Template** |![alt text](./lecture_notes/lecture_notes.png)|
