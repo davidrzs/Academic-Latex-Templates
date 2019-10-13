@@ -1,0 +1,163 @@
+\documentclass{sciposter}
+\usepackage[dvipsnames,usenames,svgnames,table]{xcolor} 
+\usepackage{lipsum}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{gensymb}
+\usepackage[utf8]{inputenc}
+\usepackage{empheq}
+% have a table that spans two pages
+\usepackage{xtab,booktabs}
+\usepackage{hyperref}
+\usepackage{fancyvrb}
+\usepackage{xtab}
+
+%widebar
+\makeatletter
+\newcommand*\rel@kern[1]{\kern#1\dimexpr\macc@kerna}
+\newcommand*\widebar[1]{%
+  \begingroup
+  \def\mathaccent##1##2{%
+    \rel@kern{0.8}%
+    \overline{\rel@kern{-0.8}\macc@nucleus\rel@kern{0.2}}%
+    \rel@kern{-0.2}%
+  }%
+  \macc@depth\@ne
+  \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
+  \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
+  \macc@set@skewchar\relax
+  \let\mathaccentV\macc@nested@a
+  \macc@nested@a\relax111{#1}%
+  \endgroup
+}
+\makeatother
+
+
+
+\geometry{
+ landscape,
+ a1paper,
+ left=5mm,
+ right=50mm,
+ top=5mm,
+ bottom=50mm,
+ }
+
+
+
+\providecommand{\tightlist}{%
+	\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+%BEGIN LISTINGDEF
+
+
+
+\usepackage{listings}
+   
+\usepackage{inconsolata}
+
+\definecolor{background}{HTML}{fcfeff}
+\definecolor{comment}{HTML}{b2979b}
+\definecolor{keywords}{HTML}{255957}
+\definecolor{basicStyle}{HTML}{6C7680}
+\definecolor{variable}{HTML}{001080}
+\definecolor{string}{HTML}{c18100}
+\definecolor{numbers}{HTML}{3f334d}
+
+\lstdefinestyle{lectureNotesListing}{
+	numbers=left,
+	xleftmargin=0.8em, % 2.8 with line numbers
+	breaklines=true,
+	frame=single,
+	framesep=0.6mm,
+	frameround=ffff,
+	framexleftmargin=0.4em, % 2.4 with line numbers | 0.4 without them
+	tabsize=4, %width of tabs
+	aboveskip=1.0em,
+	classoffset=0,
+	sensitive=true,
+	% Colors
+	backgroundcolor=\color{background},
+	basicstyle=\color{basicStyle}\small\ttfamily,
+	keywordstyle=\color{keywords},
+	commentstyle=\color{comment},
+	stringstyle=\color{string},
+	numberstyle=\color{numbers},
+	identifierstyle=\color{variable},
+	showstringspaces=true
+}
+\lstset{style=lectureNotesListing}
+
+
+%END LISTINGDEF
+
+\usepackage{todonotes}
+\newcommand{\TODO}[1]{\todo[inline]{\Large TODO:  #1}}
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+
+
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}
+    % Add to it the distance to the box, and the width of the line of the box
+\hspace{-\dlf}
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+\usepackage{graphicx,url}
+
+%BEGIN TITLE
+\title{\huge{Insert Title Here}}
+
+% if you want to set an author replace the next line with \author{your name here}
+\author{\vspace{-1cm}}
+
+
+
+\begin{document}
+\fontfamily{lmss}\selectfont
+\maketitle
+
+\begin{multicols}{3}
+
+
+
+\section{Example Section}
+\lipsum[1]
+$$\oint f(x) dx = 12 $$
+\lipsum[2]
+
+
+\section{Some other Section}
+
+\subsection{Numberer Subsection}
+\lipsum[3]
+\begin{lstlisting}[language=Python]
+# prints hello world
+def main():
+a = 12
+print("hello world")
+\end{lstlisting}
+\lipsum[6]
+
+\subsection*{Unnumbererd subsection}
+\lipsum[4]
+\lipsum[9]
+
+\end{multicols}
+\end{document}
