@@ -26,10 +26,7 @@
 
 % commands we are defining / redefining
 \renewcommand{\LettrineFontHook}{\GoudyInfamily{}}
-\newcommand{\DECORAR}[3][]{\lettrine[lines=3,loversize=.115,#1]{#2}{#3}}
-\def\contentsname{\empty}
-\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
 \newcommand{\tocr}{
 \renewcommand\cftaftertoctitle{\par\noindent\hrulefill\par\vskip-0.65em}
 \tableofcontents
@@ -39,57 +36,58 @@
 \renewcommand{\ttdefault}{pcr}
 
     
-% makes code look nice -> taken from https://github.com/Wandmalfarbe/pandoc-latex-template    
         
-\definecolor{listing-background}{rgb}{0.97,0.97,0.97}
-\definecolor{listing-rule}{HTML}{B3B2B3}
-\definecolor{listing-numbers}{HTML}{B3B2B3}
-\definecolor{listing-text-color}{HTML}{000000}
-\definecolor{listing-keyword}{HTML}{435489}
-\definecolor{listing-identifier}{HTML}{435489}
-\definecolor{listing-string}{HTML}{00999a}
-\definecolor{listing-comment}{HTML}{8e8e8e}
-\definecolor{listing-javadoc-comment}{HTML}{006CA9}
+\usepackage{inconsolata}
 
-\lstdefinestyle{eisvogellistingstyle}{
-    language=java,
+\definecolor{background}{HTML}{fcfeff}
+\definecolor{comment}{HTML}{b2979b}
+\definecolor{keywords}{HTML}{255957}
+\definecolor{basicStyle}{HTML}{6C7680}
+\definecolor{variable}{HTML}{001080}
+\definecolor{string}{HTML}{c18100}
+\definecolor{numbers}{HTML}{3f334d}
+\ifx
+\lstset{
+	% How/what to match
+	sensitive=true,
+	% Border (above and below)
+	frame=single,
+	% Extra margin on line (align with paragraph)
+	xleftmargin=\parindent,
+	% Put extra space under caption
+	belowcaptionskip=1\baselineskip,
+
+	% Break long lines into multiple lines?
+	breaklines=true,
+	% Show a character for spaces?
+	showstringspaces=false,
+	tabsize=2
+}
+\fi
+%END LISTINGDEF
+\lstdefinestyle{lectureNotesListing}{
     numbers=left,
-    backgroundcolor=\color{listing-background},
-    basicstyle=\color{listing-text-color}\small\ttfamily{}, % print whole listing small
     xleftmargin=0.8em, % 2.8 with line numbers
     breaklines=true,
     frame=single,
     framesep=0.6mm,
-    rulecolor=\color{listing-rule},
     frameround=ffff,
     framexleftmargin=0.4em, % 2.4 with line numbers | 0.4 without them
     tabsize=4, %width of tabs
-    numberstyle=\color{listing-numbers},
     aboveskip=1.0em,
-    keywordstyle=\color{listing-keyword}\bfseries, % underlined bold black keywords
     classoffset=0,
     sensitive=true,
-    identifierstyle=\color{listing-identifier}, % nothing happens
-    commentstyle=\color{listing-comment}, % white comments
-    morecomment=[s][\color{listing-javadoc-comment}]{/**}{*/},
-    stringstyle=\color{listing-string}, % typewriter type for strings
-    showstringspaces=false, % no special string spaces
-    escapeinside={/*@}{@*/}, % for comments
-    literate=
-    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
-    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
-    {à}{{\`a}}1 {è}{{\'e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
-    {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
-    {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
-    {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
-    {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
-    {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
-    {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
-    {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
-    {€}{{\EUR}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
-    {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+	% Colors
+backgroundcolor=\color{background},
+basicstyle=\color{basicStyle}\small\ttfamily,
+keywordstyle=\color{keywords},
+commentstyle=\color{comment},
+stringstyle=\color{string},
+numberstyle=\color{numbers},
+identifierstyle=\color{variable},
+    showstringspaces=true
 }
-\lstset{style=eisvogellistingstyle}
+\lstset{style=lectureNotesListing}
 %END LISTINGDEF
 
 
@@ -133,12 +131,17 @@
 \section{Introduction}
 \subsection{Intro to the Introduction}
 \lipsum[2]
-\lis
-\lipsum[4]
 $$ \oint _ 1 ^12 f(x) dx $$
+\lipsum[4]
+\begin{lstlisting}[language=Python]
+# prints hello world
+def main():
+	a = 12
+	print("hello world")
+\end{lstlisting}
 \lipsum[2]
 
-    
+
 \end{document}
     
     
