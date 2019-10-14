@@ -1,21 +1,28 @@
-# Collection of Academic Latex Templates
+# Homework Template
 
-This repository is a collection of latex templates I have used for a variety of use cases during my studies of computer science at ETHZ. 
+## Screenshot
 
-It contains the following:
+![homework template screenshot](./homework.png)
 
-- Exam Summary / Cheatsheet
-- Homework Template
-- Lecture Notes Template
+You can download this template and use it like any other latex template.
 
-Feel free to fork it and submit your enhancements.
+## Change the language
+
+Find the line ´\usepackage[english]{babel}´ and change ´english´ to your preferred language.
+
+## Turning the header and footer off
+
+Find the line ´\thispagestyle{fancy}´ and delete it. 
 
 
-## Exam Summary / Cheatsheet
+## Adding code
 
+Use the following syntax:
 
+```
+\begin{lstlisting}[language=Python]
+def main():
+	print("your code here")
+\end{lstlisting}
+```
 
-
-## Homework Template
-
-## Lecture Notes Template

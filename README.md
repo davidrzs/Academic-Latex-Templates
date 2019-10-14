@@ -19,5 +19,5 @@ Feel free to fork it and submit your enhancements.
 | Description | Screenshot |
 |-------------|------------|
 | **Exam Summary / Cheatsheet** |![exam summary screenshot](./exam_summary/exam_summary.png)|
-| **Homework Template** |![homework template screenshot](./lecture_notes/lecture_notes.png)|
+| **Homework Template** |![homework template screenshot](./homework/homework.png)|
 | **Lecture Notes Template** |![lecture notes template screenshot](./lecture_notes/lecture_notes.png)|

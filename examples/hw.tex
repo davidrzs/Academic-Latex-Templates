@@ -1,33 +1,50 @@
 \documentclass[12pt]{article}
+
+
 \usepackage[dvipsnames,usenames, table]{xcolor} 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-% you can change the language on the following line
 \usepackage[english]{babel}
 \usepackage[a4paper, margin=1in]{geometry}
 \usepackage{lipsum}
 \usepackage{libertine}
 \usepackage{amsfonts,amsmath,amssymb,amsthm} 
 \usepackage{eulervm}
+\usepackage{marvosym}
 \usepackage{float} 
 \usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \usepackage{fancyhdr}
+\usepackage{booktabs} % for "\midrule" macro
+\usepackage{tikz}
 \usepackage{graphicx}
 \usepackage{microtype}
 \usepackage[hidelinks]{hyperref}
 \usepackage{tocloft}
+\usepackage{lettrine}
+\usepackage{GoudyIn}
 \usepackage{listings}
+\usepackage{forest}
 \usepackage{parskip}
+% font stuff
+\renewcommand{\LettrineFontHook}{\GoudyInfamily{}}
+\newcommand{\DECORAR}[3][]{\lettrine[lines=3,loversize=.115,#1]{#2}{#3}}
+\def\contentsname{\empty}
 
 
-
+% in case we want a TOC
+\newcommand{\tocr}{
+\renewcommand\cftaftertoctitle{\par\noindent\hrulefill\par\vskip-0.65em}
+\tableofcontents
+\noindent\hrulefill
+}
 % some often used commands
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
-\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 
 % LISTINGDEF START
+    
 
 \usepackage{inconsolata}
 
@@ -38,7 +55,25 @@
 \definecolor{variable}{HTML}{001080}
 \definecolor{string}{HTML}{c18100}
 \definecolor{numbers}{HTML}{3f334d}
-
+\ifx
+\lstset{
+	% How/what to match
+	sensitive=true,
+	% Border (above and below)
+	frame=single,
+	% Extra margin on line (align with paragraph)
+	xleftmargin=\parindent,
+	% Put extra space under caption
+	belowcaptionskip=1\baselineskip,
+	
+	% Break long lines into multiple lines?
+	breaklines=true,
+	% Show a character for spaces?
+	showstringspaces=false,
+	tabsize=2
+}
+\fi
+%END LISTINGDEF
 \lstdefinestyle{lectureNotesListing}{
 	numbers=left,
 	xleftmargin=0.8em, % 2.8 with line numbers
@@ -62,8 +97,15 @@
 	showstringspaces=true
 }
 \lstset{style=lectureNotesListing}
-
+%END LISTINGDEF
 % LISTINGDEF END
+
+
+% for hasse diagrams
+\usepackage{tikz}
+\usetikzlibrary{trees}
+
+
 
 
 
@@ -90,11 +132,27 @@
 
 \maketitle
 
-% if you dont want to have a header and footer put a '%' infront of the next line
 \thispagestyle{fancy}
 
 
-\section*{1.1 First Exercise}
+\section*{14.2 Calculi}
+\begin{itemize}
+    \item[b)] We have $$\{(D \land A) \rightarrow C, A \land B, B \land A, (B \lor C) \rightarrow D\}$$and now some mathemagic  $$\{(D \land A) \rightarrow C, A \land B, (B \lor C) \rightarrow D\}$$ Using derivation calculus we get $\mathcal{K}' := \{R_1,R_2,R_4,R_6\}$ to derive $A\land B \land C \land D$ from the set of formulas above:
+    \begin{equation*}
+    \begin{gathered}
+        \{A\land B\} \vdash_{R_6} \{A\}\\
+        \{A\land B\} \vdash_{R_6} \{B\}\\
+ 			\ldots \\
+        \{A \land B, A \land D\} \vdash_{R_6} \{A \land B \land D\}\\
+        \{A \land B \land D , C\} \vdash_{R_6} \{A \land B \land C \land D\}
+        \end{gathered}
+    \end{equation*}
+    
+    \item[c)] I claim that it is not complete. assume we have \{A,B\} and we want to show using $\mathcal{K}'$ that $A \lor B$ holds. In the rules above even if we use the implicit $\lor$ hidden in the $\rightarrow$ of rule $R_4$ we would never be able to get rid of the $\neg$ in rule $R_4$ since we do not have any rules for negation. Therefore by example we have shown that $\mathcal{K'}$ is not complete.
+    
+\end{itemize}
+
+\section*{Some Code}
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 \begin{lstlisting}[language=Python]
 # prints hello world
@@ -102,16 +160,7 @@ def main():
 a = 12
 print("hello world")
 \end{lstlisting}
-And now some maths:
-  \begin{equation*}
-\begin{gathered}
-\{A\land B\} \vdash_{R_6} \{A\}\\
-\{A\land B\} \vdash_{R_6} \{B\}\\
-\ldots \\
-\{A \land B, A \land D\} \vdash_{R_6} \{A \land B \land D\}\\
-\{A \land B \land D , C\} \vdash_{R_6} \{A \land B \land C \land D\}
-\end{gathered}
-\end{equation*}
+\lipsum[2]
 
 
 
