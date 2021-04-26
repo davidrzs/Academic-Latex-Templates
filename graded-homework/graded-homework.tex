@@ -1,0 +1,146 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+
+\usepackage{amsmath,amssymb,amsfonts,mathrsfs,xcolor,url}
+\usepackage{graphicx}
+\graphicspath{{./img/}}
+
+
+\usepackage{parskip}
+
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+
+\declaretheorem[style=definition,name=Definition,qed=$\lrcorner$]{definition}
+
+
+
+\declaretheorem[style=definition,name=Example,qed=$\lozenge$]{example}
+
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\usepackage{todonotes}
+\usepackage{beton}
+
+
+\usepackage{concmath}
+
+\DeclareFontSeriesDefault[rm]{bf}{sbc}
+\usepackage[a4paper, margin=1.2in]{geometry}
+\usepackage{mdframed}
+
+% begin custom commands
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\O}[1]{\mathcal{O}\left(#1\right)}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\trs}{\operatorname{trs}}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Lecture Name}
+\fancyhead[R]{Assignment Name}
+\fancyfoot[C]{Page \thepage}
+
+
+	
+
+
+\begin{document}
+	\thispagestyle{fancy}
+\begin{center}
+	{\Huge Assignment Name}  \\ Author Name\\
+\today
+\end{center}
+
+\hrule
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vspace*{5mm}
+
+\section{Task}
+For a given fixed convex polygon $\C$ with vertices $p_0,\ldots p_{n-1}$ in counterclockwise order and a non-vertical query line $q$, return the area $A_q$ in $\C$ under $q$ in time $\O{\log n}$.
+
+
+\section{Solution}
+
+\paragraph{Idea}
+
+Let us first sketch how we will solve this algorithmic problem efficiently. All the following definitions can be seen in figure \ref{fig:approach} which greatly helps understanding the algorithm.
+We will follow a two step approach.
+
+First, we will have to find out where $q$ intersects the convex polygon. There are three different options for this:
+\begin{enumerate}
+\item The line $q$ is completely above $\C$. In this case we will return the whole area of $\C$. The area calculation will be covered in part two.
+\item The line $q$ is completely below $\C$. In this case we will return the an area of 0.
+\item The line $q$ intersects $\C$. This will give us two points where the convex polygon $\C$ and line $q$ intersect (one where $q$ ``enters" $\C$ and one where $q$ ``exits" $\C$). By assumption $q$ is not a vertical line giving the intersection points two different $x$-coordinates. Let the intersection point with the smaller $x$-coordinate be denoted by $i_l$ (for intersection-left) and the one with the bigger $x$-coordinate $i_r$ (for intersection-right).
+\end{enumerate}
+
+Using an idea very similar to the \textit{Reporting Points Below a Query Line Problem} as seen in the lecture we will identify the two vertices $p_l$ and $p_r$. We define $p_l$ ($p_r$) as the point $p_i$ in the set of points which make up $\C$ which is the lower vertex of the edge which $q$ has pierced while intersecting $\C$, or in other words, the vertex of smaller $y$-coordinate of the edge of $\C$ on which $i_l$ ($i_r$) is located on. Note that $p_l$ and $p_r$ can also refer to the same point.
+
+Having located $i_l, i_r, p_l, p_r$ as shown in figure \ref{fig:approach} we can move on to finding the area.
+
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.5\textwidth]{generalApproach.png}
+%	\caption{Sketch of the algorithm for finding the grey area of figure \ref{fig:sit}. Note that by construction $A_{q,a}\cup A_{q,f} = A_{q}$}
+%	\label{fig:approach}
+%\end{figure}
+
+
+Let $A_q$ be the are we are looking for. To find $A_q$ efficiently we split it up into two different subareas $A_{q,a}$ and $A_{q,f}$ with $A_{q,a}\cup A_{q,f} = A_{q}$.
+
+\begin{itemize}
+	\item $A_{q,f}$ (fixed area under $q$): The area of the convex polygon formed by including all vertices of $\C$ starting at $p_l$ and walking along $\C$ in a counter-clockwise rotation and ending with $p_r$ (orange in figure \ref{fig:approach}).
+	\item $A_{q,a}$ (adaptive area under $q$): The area of the polygon formed by the points $\{p_l,p_r,i_r,i_l\}$ (blue in figure \ref{fig:approach}). Note that we can find this area by splitting it up into two triangles (see dashed line in figure \ref{fig:approach}) and calculating the area of the two individual triangles.
+\end{itemize}
+
+
+Once we have found the values for $A_{q,f}$ and $A_{q,a}$ we return their sum as the answer. 
+
+
+Having covered the basic idea behind the algorithm we can now develop the algorithm rigorously.
+
+\bigskip
+
+
+\begin{mdframed}
+	\textbf{Important Note \quad} To make indexing easier we will adopt modular indexing in this paper. This means all indexes $p_i$ should be read as $$p_i = p_{ j} \text{ \quad where \quad } j=i\mod (\text{length of array}).$$ As an example consider $[p_0,p_1,p_2]$, then the point $p_{i+1}$ for $i=2$ is $p_0$.
+	
+	From this point on the notion of modular indexing is implicitly assumed.
+\end{mdframed}
+
+
+
+
+
+\begin{thebibliography}{9}
+	\bibitem{lecnotes} 
+ 	Some entry here
+	
+\end{thebibliography}
+
+
+\end{document}

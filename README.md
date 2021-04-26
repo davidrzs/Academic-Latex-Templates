@@ -1,5 +1,6 @@
 # Collection of Academic Latex Templates
 
+**Repository still under construction!**
 
 This repository is a collection of latex templates I have used for a variety of use cases during my studies of computer science at ETHZ. 
 
